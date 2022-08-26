@@ -1,17 +1,25 @@
-FROM python
+FROM python:3.10-slim as build
 
-WORKDIR /usr/src/app
+RUN \
+    set -ex && \
+    apt-get -y update && \
+    apt-get -y install --no-install-recommends git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV VIRTUAL_ENV=/usr/src/app/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+WORKDIR /opt/octodns
 
-COPY requirements.txt .
-RUN pip install octodns
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt requirements.txt
 
-RUN pip install -e git+https://github.com/kompetenzbolzen/octodns-custom-provider.git#egg=octodns-custom-providers
+RUN \
+    set -ex  &&\
+    python -m venv env && \
+    . env/bin/activate && \
+    pip install --no-cache-dir -r requirements.txt
 
-RUN mkdir config
+RUN \
+    pip install -e git+https://github.com/kompetenzbolzen/octodns-custom-provider.git#egg=octodns-custom-providers
 
-VOLUME [ "/config" ]
+ENV PATH=/opt/octodns/env/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+CMD [ "/bin/sh" ]
