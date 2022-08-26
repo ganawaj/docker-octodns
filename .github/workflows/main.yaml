@@ -49,12 +49,12 @@ jobs:
         if: contains(env.BRANCH, 'develop') || startsWith(env.BRANCH, 'release') || startsWith(env.BRANCH, 'hotfix') || startsWith(env.BRANCH, 'tags')
         run: |
           docker build . \
-            -t ${{ secrets.DOCKER_HUB_USERNAME }}/octodns:${{ env.SEMVER }} \
+            -t ${{ secrets.DOCKER_HUB_USERNAME }}/octodns:${{ env.SEMVER }}
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/octodns:${{ env.SEMVER }}
 
       - name: run/docker-build-push-main
         if: contains(env.BRANCH, 'main')
         run: |
           docker build . \
-            -t ${{ secrets.DOCKER_HUB_USERNAME }}/octodns:latest \
+            -t ${{ secrets.DOCKER_HUB_USERNAME }}/octodns:latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/octodns:latest
