@@ -1,25 +1,2 @@
-# AzureProvider
-azure-identity
-azure-mgmt-dns
-azure-mgmt-trafficmanager
-
-# Akamai
-edgegrid-python
-
-# DynProvider
-dyn
-
-# GoogleCloudProvider
-google-cloud-dns
-
-# Ns1Provider
-ns1-python
-
-# OVH Provider
-ovh
-
 # Route53
 boto3
-
-# Transip
-transip

@@ -18,7 +18,7 @@ RUN \
     pip install --no-cache-dir -r requirements.txt
 
 RUN \
-    pip install -e git+https://github.com/kompetenzbolzen/octodns-custom-provider.git#egg=octodns-custom-providers
+    pip install -e git+https://github.com/ganawaj/octodns-custom-provider.git#egg=octodns-custom-providers
 
 ENV PATH=/opt/octodns/env/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
